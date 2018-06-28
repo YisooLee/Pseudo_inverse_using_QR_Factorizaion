@@ -80,37 +80,24 @@ _Matrix_Type_ pinv_qr(const _Matrix_Type_ &A)
 
 int main()
 {
-	Eigen::MatrixXd A = MatrixXd::Random(23, 26);
-	A.row(1).setZero();
+	Eigen::MatrixXd A = MatrixXd::Random(24, 24);
+
 
 
 	StartCounter();
 	for (int i = 0; i < 100; i++) {
-		//A.setRandom();
-		//A.row(0).setZero();
+		A.setRandom();
+		A.row(1).setZero();
 		pseudoInverse(A);
 	}
-	cout << pseudoInverse(A).col(0).transpose() << endl;
-	cout << "" << endl;
-	cout << (pseudoInverse(A)*A).diagonal().transpose() << endl;
-	cout << "" << endl;
-	cout << (A*pseudoInverse(A)).diagonal().transpose() << endl;
-	cout << "" << endl;
 	cout << "svd" << "\t" << GetCounter() / 1000.0 << endl;
 
 	StartCounter();
 	for (int i = 0; i < 100; i++) {
-		//A.setRandom();
-
-		//A.row(0).setZero();
+		A.setRandom();
+		A.row(1).setZero();
 		pinv_qr(A);
 	}
-	cout << pinv_qr(A).col(0).transpose() << endl;
-	cout << "" << endl;
-	cout << (pinv_qr(A)*A).diagonal().transpose() << endl;
-	cout << "" << endl;
-	cout << (A*pinv_qr(A)).diagonal().transpose() << endl;
-	cout << "" << endl;
 	cout << "qr" << "\t" << GetCounter() / 1000.0 << endl;
 
 
